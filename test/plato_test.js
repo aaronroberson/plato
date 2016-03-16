@@ -144,7 +144,7 @@ exports['plato'] = {
         eslint: 'test/fixtures/.eslintrc.json'
     }, function(reports) {
       var overview = plato.getOverviewReport(reports);
-      test.ok(overview.summary.total.jshint === 8, 'Should contain total eslint issues');
+      test.ok(overview.summary.total.jshint === 31, 'Should contain total eslint issues');
       test.done();
     });
   }

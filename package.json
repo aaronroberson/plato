@@ -1,8 +1,8 @@
 {
-  "name": "plato",
+  "name": "plato-esnext",
   "description": "JavaScript source analysis and visualizer",
-  "version": "1.4.0",
-  "homepage": "https://github.com/es-analysis/plato",
+  "version": "1.4.1",
+  "homepage": "https://github.com/aaronroberson/plato-esnext",
   "author": {
     "name": "Jarrod Overson",
     "email": "jsoverson@gmail.com",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/es-analysis/plato.git"
+    "url": "git://github.com/aaronroberson/plato-esnext.git"
   },
   "bugs": {
-    "url": "https://github.com/es-analysis/plato/issues"
+    "url": "https://github.com/aaronroberson/plato-esnext/issues"
   },
   "bin": "bin/plato",
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/es-analysis/plato/blob/master/LICENSE-MIT"
+      "url": "https://github.com/aaronroberson/plato-esnext/blob/master/LICENSE-MIT"
     }
   ],
   "main": "lib/plato",
@@ -52,12 +52,8 @@
     "glob": "~5.0.1",
     "jshint": "~2.6.3",
     "lodash": "~3.5.0",
-    "posix-getopt": "~1.1.0"
+    "posix-getopt": "~1.1.0",
     "complexity-report": "~0.10.3",
     "eslint": "^1.5.1"
-    "fs-extra": "~0.3.2",
-    "jshint": "~2.5.1",
-    "lodash": "~1.0.1",
-    "posix-getopt": "~1.0.0"
   }
 }
