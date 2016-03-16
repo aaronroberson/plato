@@ -1,10 +1,12 @@
-# plato
+# plato-eslint
+
+A fork of [plato](https://github.com/es-analysis/plato) with ESLint and ES2015 support.
 
 [![Build Status](https://travis-ci.org/es-analysis/plato.png?branch=master)](https://travis-ci.org/es-analysis/plato)
 
 [![Codeship Status for es-analysis/plato](https://www.codeship.io/projects/479c7b90-f024-0131-6150-66d8ca7dad4d/status)](https://www.codeship.io/projects/27326)
 
-Visualize JavaScript source complexity with plato.
+Visualize JavaScript (including ES2015) source complexity with plato.
 
 ## Example report on popular projects
 
@@ -13,7 +15,7 @@ Visualize JavaScript source complexity with plato.
  - [marionettejs](http://es-analysis.github.com/plato/examples/marionette/)
 
 ## Installation
-Install the module with: `npm install -g plato`
+Install the module with: `npm install -g plato-esnext`
 
 ## Usage
 
@@ -60,7 +62,7 @@ plato -r -d report -l .jshintrc -t "My Awesome App" -x .json routes/*.js
 ### From scripts
 
 ```
-var plato = require('plato');
+var plato = require('plato-esnext');
 
 var files = [
   'path/to/javascript/file1.js',
@@ -93,7 +95,8 @@ plato.inspect(files, outputDir, options, callback);
   - [David Linse](https://github.com/davidlinse)
 
 ## Release History
-
+  - 1.4.2 Updated npm dependencies
+  - 1.4.1 Add ESLint and ES2015 support
   - 1.3.0 Merged 107,130,128,119,114. Numerous bug fixed.
     - Minor bumped for changes to parsing of files passed. Technically a breaking change but effectively a bug fix + feature so bumping minor.
   - 1.2.1 Bumping versions for jshint and lodash

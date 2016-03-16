@@ -1,7 +1,7 @@
 {
   "name": "plato-esnext",
-  "description": "JavaScript source analysis and visualizer",
-  "version": "1.4.1",
+  "description": "JavaScript (including ES2015) source analysis and visualizer",
+  "version": "1.4.2",
   "homepage": "https://github.com/aaronroberson/plato-esnext",
   "author": {
     "name": "Jarrod Overson",
@@ -32,10 +32,10 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-casper": "~0.4.0",
-    "grunt-contrib-jshint": "~0.11.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.8.0",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
   },
   "keywords": [
     "halstead",
@@ -47,13 +47,13 @@
     "analyze"
   ],
   "dependencies": {
+    "complexity-report": "^2.0.0-alpha",
     "escomplex-js": "~1.2.0",
-    "fs-extra": "~0.16.5",
-    "glob": "~5.0.1",
-    "jshint": "~2.6.3",
-    "lodash": "~3.5.0",
-    "posix-getopt": "~1.1.0",
-    "complexity-report": "~0.10.3",
-    "eslint": "^1.5.1"
+    "eslint": "^2.4.0",
+    "fs-extra": "^0.26.7",
+    "glob": "^7.0.3",
+    "jshint": "^2.9.1",
+    "lodash": "^4.6.1",
+    "posix-getopt": "^1.2.0"
   }
 }

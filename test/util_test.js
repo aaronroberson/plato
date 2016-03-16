@@ -43,7 +43,7 @@ exports['util'] = {
     var files = [
       '/lib/foo/bar/a.js',
       '/lib/foo/bar/baz/b.js',
-      '/lib/foo/bar/qux/c.js',
+      '/lib/foo/bar/qux/c.js'
     ];
 
     test.equal(util.findCommonBase(files), '/lib/foo/bar/', 'should find common prefix');
