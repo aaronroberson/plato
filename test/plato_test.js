@@ -130,16 +130,21 @@ exports['plato'] = {
       test.done();
     });
   },
-  'test file ending checks' : function(test) {
+
+  'should run eslint with default config' : function(test) {
+
     var files = [
-      'test/fixtures/test.es'
+      'test/fixtures/a.js',
+      'test/fixtures/b.js'
     ];
-    
+
     test.expect(1);
-    
-    plato.inspect(files, null, {}, function(reports) {
+
+    plato.inspect(files, null, {
+        eslint: 'test/fixtures/.eslintrc.json'
+    }, function(reports) {
       var overview = plato.getOverviewReport(reports);
-      test.ok(reports.length === 1, 'Should analyze 1 file');
+      test.ok(overview.summary.total.jshint === 8, 'Should contain total eslint issues');
       test.done();
     });
   }
