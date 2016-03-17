@@ -30,7 +30,7 @@ Usage : plato [options] -d <output_dir> <input files>
   -v, --version
       Print the version.
   -x, --exclude : String
-      File exclusion regex
+      File name exclusion
   -d, --dir : String *required*
       The output directory
   -r, --recurse
@@ -39,6 +39,8 @@ Usage : plato [options] -d <output_dir> <input files>
       Specify a jshintrc file for JSHint linting
   -e, --eslint : String
       Specify a eslintrc file for ESLint linting
+  -s  --sourcetype :
+      Specify a source type (script or module). ES2015 requires 'module'
   -t, --title : String
       Title of the report
   -D, --date : String
