@@ -56,5 +56,9 @@
     "long": "noempty",
     "desc": "Skips empty lines from line count",
     "type": "Boolean"
+  },
+  "s": {
+    "long": "sourcetype",
+    "description": "Specify a sourceType (script or module). ES6 Requires module type."
   }
 }
