@@ -1,7 +1,7 @@
 {
   "name": "plato-esnext",
   "description": "JavaScript (including ES2015) source analysis and visualizer",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "homepage": "https://github.com/aaronroberson/plato-esnext",
   "author": {
     "name": "Jarrod Overson",

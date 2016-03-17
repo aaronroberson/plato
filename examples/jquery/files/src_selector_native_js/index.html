@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - src/selector-native.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>src/selector-native.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.16</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">235</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">45.63</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.57</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define( [
+	&quot;./core&quot;,
+	&quot;./var/document&quot;,
+	&quot;./var/documentElement&quot;,
+	&quot;./var/hasOwn&quot;,
+	&quot;./var/indexOf&quot;
+], function( jQuery, document, documentElement, hasOwn, indexOf ) {
+
+/*
+ * Optional (non-Sizzle) selector module for custom builds.
+ *
+ * Note that this DOES NOT SUPPORT many documented jQuery
+ * features in exchange for its smaller size:
+ *
+ * Attribute not equal selector
+ * Positional selectors (:first; :eq(n); :odd; etc.)
+ * Type selectors (:input; :checkbox; :button; etc.)
+ * State-based selectors (:animated; :visible; :hidden; etc.)
+ * :has(selector)
+ * :not(complex selector)
+ * custom selectors via Sizzle extensions
+ * Leading combinators (e.g., $collection.find(&quot;&gt; *&quot;))
+ * Reliable functionality on XML fragments
+ * Requiring all parts of a selector to match elements under context
+ *   (e.g., $div.find(&quot;div &gt; *&quot;) now matches children of $div)
+ * Matching against non-elements
+ * Reliable sorting of disconnected nodes
+ * querySelectorAll bug fixes (e.g., unreliable :focus on WebKit)
+ *
+ * If any of these are unacceptable tradeoffs, either use Sizzle or
+ * customize this stub for the project&#039;s specific needs.
+ */
+
+var hasDuplicate, sortInput,
+	sortStable = jQuery.expando.split( &quot;&quot; ).sort( sortOrder ).join( &quot;&quot; ) === jQuery.expando,
+	matches = documentElement.matches ||
+		documentElement.webkitMatchesSelector ||
+		documentElement.mozMatchesSelector ||
+		documentElement.oMatchesSelector ||
+		documentElement.msMatchesSelector,
+
+	// CSS string/identifier serialization
+	// https://drafts.csswg.org/cssom/#common-serializing-idioms
+	rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\x80-\uFFFF\w-]/g,
+	fcssescape = function( ch, asCodePoint ) {
+		if ( asCodePoint ) {
+
+			// U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
+			if ( ch === &quot;\0&quot; ) {
+				return &quot;\uFFFD&quot;;
+			}
+
+			// Control characters and (dependent upon position) numbers get escaped as code points
+			return ch.slice( 0, -1 ) + &quot;\\&quot; + ch.charCodeAt( ch.length - 1 ).toString( 16 ) + &quot; &quot;;
+		}
+
+		// Other potentially-special ASCII characters get backslash-escaped
+		return &quot;\\&quot; + ch;
+	};
+
+function sortOrder( a, b ) {
+
+	// Flag for duplicate removal
+	if ( a === b ) {
+		hasDuplicate = true;
+		return 0;
+	}
+
+	// Sort on method existence if only one input has compareDocumentPosition
+	var compare = !a.compareDocumentPosition - !b.compareDocumentPosition;
+	if ( compare ) {
+		return compare;
+	}
+
+	// Calculate position if both inputs belong to the same document
+	compare = ( a.ownerDocument || a ) === ( b.ownerDocument || b ) ?
+		a.compareDocumentPosition( b ) :
+
+		// Otherwise we know they are disconnected
+		1;
+
+	// Disconnected nodes
+	if ( compare &amp; 1 ) {
+
+		// Choose the first element that is related to our preferred document
+		if ( a === document || a.ownerDocument === document &amp;&amp;
+			jQuery.contains( document, a ) ) {
+			return -1;
+		}
+		if ( b === document || b.ownerDocument === document &amp;&amp;
+			jQuery.contains( document, b ) ) {
+			return 1;
+		}
+
+		// Maintain original order
+		return sortInput ?
+			( indexOf.call( sortInput, a ) - indexOf.call( sortInput, b ) ) :
+			0;
+	}
+
+	return compare &amp; 4 ? -1 : 1;
+}
+
+function uniqueSort( results ) {
+	var elem,
+		duplicates = [],
+		j = 0,
+		i = 0;
+
+	hasDuplicate = false;
+	sortInput = !sortStable &amp;&amp; results.slice( 0 );
+	results.sort( sortOrder );
+
+	if ( hasDuplicate ) {
+		while ( ( elem = results[ i++ ] ) ) {
+			if ( elem === results[ i ] ) {
+				j = duplicates.push( i );
+			}
+		}
+		while ( j-- ) {
+			results.splice( duplicates[ j ], 1 );
+		}
+	}
+
+	// Clear input after sorting to release objects
+	// See https://github.com/jquery/sizzle/pull/225
+	sortInput = null;
+
+	return results;
+}
+
+function escape( sel ) {
+	return ( sel + &quot;&quot; ).replace( rcssescape, fcssescape );
+}
+
+jQuery.extend( {
+	uniqueSort: uniqueSort,
+	unique: uniqueSort,
+	escapeSelector: escape,
+	find: function( selector, context, results, seed ) {
+		var elem, nodeType,
+			i = 0;
+
+		results = results || [];
+		context = context || document;
+
+		// Same basic safeguard as Sizzle
+		if ( !selector || typeof selector !== &quot;string&quot; ) {
+			return results;
+		}
+
+		// Early return if context is not an element or document
+		if ( ( nodeType = context.nodeType ) !== 1 &amp;&amp; nodeType !== 9 ) {
+			return [];
+		}
+
+		if ( seed ) {
+			while ( ( elem = seed[ i++ ] ) ) {
+				if ( jQuery.find.matchesSelector( elem, selector ) ) {
+					results.push( elem );
+				}
+			}
+		} else {
+			jQuery.merge( results, context.querySelectorAll( selector ) );
+		}
+
+		return results;
+	},
+	text: function( elem ) {
+		var node,
+			ret = &quot;&quot;,
+			i = 0,
+			nodeType = elem.nodeType;
+
+		if ( !nodeType ) {
+
+			// If no nodeType, this is expected to be an array
+			while ( ( node = elem[ i++ ] ) ) {
+
+				// Do not traverse comment nodes
+				ret += jQuery.text( node );
+			}
+		} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+
+			// Use textContent for elements
+			return elem.textContent;
+		} else if ( nodeType === 3 || nodeType === 4 ) {
+			return elem.nodeValue;
+		}
+
+		// Do not include comment or processing instruction nodes
+
+		return ret;
+	},
+	contains: function( a, b ) {
+		var adown = a.nodeType === 9 ? a.documentElement : a,
+			bup = b &amp;&amp; b.parentNode;
+		return a === bup || !!( bup &amp;&amp; bup.nodeType === 1 &amp;&amp; adown.contains( bup ) );
+	},
+	isXMLDoc: function( elem ) {
+
+		// documentElement is verified for cases where it doesn&#039;t yet exist
+		// (such as loading iframes in IE - #4833)
+		var documentElement = elem &amp;&amp; ( elem.ownerDocument || elem ).documentElement;
+		return documentElement ? documentElement.nodeName !== &quot;HTML&quot; : false;
+	},
+	expr: {
+		attrHandle: {},
+		match: {
+			bool: new RegExp( &quot;^(?:checked|selected|async|autofocus|autoplay|controls|defer&quot; +
+				&quot;|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped)$&quot;, &quot;i&quot; ),
+			needsContext: /^[\x20\t\r\n\f]*[&gt;+~]/
+		}
+	}
+} );
+
+jQuery.extend( jQuery.find, {
+	matches: function( expr, elements ) {
+		return jQuery.find( expr, null, null, elements );
+	},
+	matchesSelector: function( elem, expr ) {
+		return matches.call( elem, expr );
+	},
+	attr: function( elem, name ) {
+		var fn = jQuery.expr.attrHandle[ name.toLowerCase() ],
+
+			// Don&#039;t get fooled by Object.prototype properties (jQuery #13807)
+			value = fn &amp;&amp; hasOwn.call( jQuery.expr.attrHandle, name.toLowerCase() ) ?
+				fn( elem, name, jQuery.isXMLDoc( elem ) ) :
+				undefined;
+		return value !== undefined ? value : elem.getAttribute( name );
+	}
+} );
+
+} );</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
